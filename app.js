@@ -27,6 +27,6 @@ app.get("/", (req, res) => {
   res.render("index"); 
 });
 
-server.listen(3000, () => {
+server.listen(3000, "192.168.241.128", () => {
   console.log("Server is running on port 3000");
 });
