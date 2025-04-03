@@ -27,4 +27,20 @@ socket.on('recieve-location', (data) => {
     const { id, latitude, longitude } = data;
     console.log(data)
     map.setView([latitude, longitude], 15);
- })
+    if (markers[id])
+    {
+        markers[id].setLatLng([latitude, longitude]);
+    }
+    else {
+        markers[id] = L.marker([latitude, longitude]).addTo(map)
+    }
+})
+ 
+socket.on('user-disconnected', (id) => {
+    if (markers[id])
+    {
+        map.removeLayer(markers[id]);
+        delete markers[id];
+    }
+    console.log('User disconnected:', id);
+})
