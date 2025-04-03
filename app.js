@@ -13,7 +13,10 @@ app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 
 io.on("connection", function (socket) {
-  console.log("A user connected");
+    socket.on("send-location", function (data) {
+      io.emit("recieve-location",{id:socket.id, ...data})
+    })
+    console.log("New user connected");
 });
 
 app.get("/", (req, res) => {

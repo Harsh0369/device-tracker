@@ -20,3 +20,11 @@ const map = L.map('map').setView([0, 0], 10);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.github.com/Harsh0369">Harsh</a>',
 }).addTo(map);
+
+const markers = {}
+
+socket.on('recieve-location', (data) => {
+    const { id, latitude, longitude } = data;
+    console.log(data)
+    map.setView([latitude, longitude], 15);
+ })
